@@ -11,13 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: update app version
-        env:
-          OLD_VERSION: ${{ vars.APP_VERSION }}
-          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
+          export OLD_VERSION=${{ vars.APP_VERSION }}
+          export NEW_VERSION=$((OLD_VERSION + 1))
           gh variable list
-          gh variable set APP_VERSION --body "$((OLD_VERSION + 1))"
+          gh variable set APP_VERSION --body "${NEW_VERSION}"
           gh variable list
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
   debug:
     runs-on: ubuntu-latest
     env:
