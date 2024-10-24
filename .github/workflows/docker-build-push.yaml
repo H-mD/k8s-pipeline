@@ -15,20 +15,16 @@ jobs:
           IFS='.' read -r MAJOR MINOR <<< "${OLD_VERSION}"
           NEW_MINOR=$((MINOR + 1))
           NEW_VERSION="${MAJOR}.${NEW_MINOR}"
-          gh variable list
           gh variable set APP_VERSION --body "${NEW_VERSION}"
-          gh variable list
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
           OLD_VERSION: ${{ vars.APP_VERSION }}
   debug:
     runs-on: ubuntu-latest
-    env:
-      APP_VERSION: ${{ vars.APP_VERSION }}
     steps:
       - name: check app version
         run: |
-         echo $APP_VERSION
+         gh variable get APP_VERSION --json value | jq -r '.value'
   # build:
   #   runs-on: ubuntu-latest
   #   env:
