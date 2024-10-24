@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: laravel-app
+  template:
+    metadata:
+      labels:
+        app: laravel-app
+    spec:
+      containers:
+      - name: laravel-app
+        image: hmd17/simple-laravel:2.0
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8888
+        envFrom:
+          - configMapRef:
+              name: laravel-env
+          - secretRef:
+              name: laravel-secret
