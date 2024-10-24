@@ -13,7 +13,9 @@ jobs:
       - name: update app version
         run: |
           export OLD_VERSION=${{ vars.APP_VERSION }}
+          echo $OLD_VERSION
           export NEW_VERSION=$((OLD_VERSION + 1))
+          echo $NEW_VERSION
           gh variable list
           gh variable set APP_VERSION --body "${NEW_VERSION}"
           gh variable list
