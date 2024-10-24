@@ -12,14 +12,11 @@ jobs:
       - name: update app version
         env:
           OLD_VERSION: ${{ vars.APP_VERSION }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
-         gh api \
-           --method PATCH \
-           -H "Accept: application/vnd.github+json" \
-           -H "X-GitHub-Api-Version: 2022-11-28" \
-           /repos/H-mD/k8s-pipeline/actions/variables/NAME \
-            -f name='APP_VERSION' \
-            -f "value=$(( OLD_VERSION + 1 ))"
+          gh variable list
+          gh variable set APP_VERSION --body "$((OLD_VERSION + 1))"
+          gh variable list
   debug:
     runs-on: ubuntu-latest
     env:
