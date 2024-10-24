@@ -1,3 +1,3 @@
-# Project Untuk Penugasan
+# k8s-pipeline
 
-Silahkan ganti `(Ganti Disini)` di line ke 13 file `resources\views\index` dengan angka keberapa mesin yang dipakai
+A repository to try out ci/cd stuff
