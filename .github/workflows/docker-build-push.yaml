@@ -9,7 +9,6 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: update app version
         run: |
           IFS='.' read -r MAJOR MINOR <<< "${OLD_VERSION}"
@@ -25,6 +24,8 @@ jobs:
       - name: check app version
         run: |
          gh variable get APP_VERSION --json value | jq -r '.value'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
   # build:
   #   runs-on: ubuntu-latest
   #   env:
