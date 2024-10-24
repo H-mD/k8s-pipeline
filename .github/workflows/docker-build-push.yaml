@@ -22,6 +22,7 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: check app version
         run: |
          gh variable get APP_VERSION --json value | jq -r '.value'
