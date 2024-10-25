@@ -21,18 +21,19 @@ jobs:
           OLD_VERSION: ${{ vars.APP_VERSION }}
   debug:
     runs-on: ubuntu-latest
+    needs: update
     steps:
-      - uses: actions/checkout@v3
-      - name: get curr app version
-        run: |
-         curr_version=$(gh variable get APP_VERSION --json value | jq -r '.value')
-         echo "VERSION=${curr_version}" >> $GITHUB_ENV
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+      # - uses: actions/checkout@v3
+      # - name: get curr app version
+      #   run: |
+      #    curr_version=$(gh variable get APP_VERSION --json value | jq -r '.value')
+      #    echo "VERSION=${curr_version}" >> $GITHUB_ENV
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.PAT }}
 
       - name: check github-env
         run: |
-          echo $VERSION
+          echo ${{ vars.APP_VERSION }}
   # build:
   #   runs-on: ubuntu-latest
   #   env:
