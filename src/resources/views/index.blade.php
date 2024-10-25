@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Ini adalah server no : 3-debug-16</h1>
+    <h1>Ini adalah server no : pipeline-test</h1>
     <a href="{{route('create')}}" class="btn btn-success mt-2 mb-2">Tambah</a>
     <table id="data" class="display pl-2 pr-2">
         <thead>
