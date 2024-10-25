@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: check github-env
         run: |
-          echo $app_Ver
+          echo $app_ver
   # build:
   #   runs-on: ubuntu-latest
   #   env:
