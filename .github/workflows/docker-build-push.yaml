@@ -52,7 +52,7 @@ jobs:
   
   deploy:
     runs-on: ubuntu-latest
-    needs: update
+    needs: [update, build]
     env:
       app_ver: ${{needs.update.outputs.app_ver}}
     steps:
