@@ -13,8 +13,8 @@ jobs:
       - name: update app version
         run: |
           IFS='.' read -r MAJOR MINOR <<< "${OLD_VERSION}"
-          NEW_MINOR=$((MINOR + 1))
-          NEW_VERSION="${MAJOR}.${NEW_MINOR}"
+          NEW_MAJOR=$((MAJOR + 1))
+          NEW_VERSION="${NEW_MAJOR}.${MINOR}"
           gh variable set APP_VERSION --body "${NEW_VERSION}"
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
@@ -23,11 +23,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: check app version
+      - name: get curr app version
         run: |
-         gh variable get APP_VERSION --json value | jq -r '.value'
+         curr_version=gh variable get APP_VERSION --json value | jq -r '.value' 
+         echo "APP_VERSION=${curr_version}" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: check github-env
+        run: |
+          echo $env:APP_VERSION
   # build:
   #   runs-on: ubuntu-latest
   #   env:
